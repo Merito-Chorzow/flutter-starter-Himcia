@@ -1,72 +1,96 @@
 import 'package:flutter/material.dart';
 
-class MyAppBar extends StatelessWidget {
-  const MyAppBar({required this.title, super.key});
+void main() => runApp(const FirstApp());
 
-  // Fields in a Widget subclass are always marked "final".
-
-  final Widget title;
+class FirstApp extends StatelessWidget {
+  const FirstApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 56, // in logical pixels
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      decoration: BoxDecoration(color: Colors.blue[500]),
-      // Row is a horizontal, linear layout.
-      child: Row(
-        children: [
-          const IconButton(
-            icon: Icon(Icons.menu),
-            tooltip: 'Navigation menu',
-            onPressed: null, // null disables the button
-          ),
-          // Expanded expands its child
-          // to fill the available space.
-          Expanded(child: title),
-          const IconButton(
-            icon: Icon(Icons.search),
-            tooltip: 'Search',
-            onPressed: null,
-          ),
-        ],
-      ),
-    );
+    return const MaterialApp(home: NavigationExample());
   }
 }
 
-class MyScaffold extends StatelessWidget {
-  const MyScaffold({super.key});
+class NavigationExample extends StatefulWidget {
+  const NavigationExample({super.key});
+
+  @override
+  State<NavigationExample> createState() => _NavigationExampleState();
+}
+
+class _NavigationExampleState extends State<NavigationExample> {
+  int currentPageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    // Material is a conceptual piece
-    // of paper on which the UI appears.
-    return Material(
-      // Column is a vertical, linear layout.
-      child: Column(
-        children: [
-          MyAppBar(
-            title: Text(
-              'Example title',
-              style:
-                  Theme.of(context) //
-                      .primaryTextTheme
-                      .titleLarge,
-            ),
+    final ThemeData theme = Theme.of(context);
+    return Scaffold(
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPageIndex = index;
+          });
+        },
+        indicatorColor: Colors.pinkAccent,
+        selectedIndex: currentPageIndex,
+        destinations: const <Widget>[
+          NavigationDestination(
+            selectedIcon: Icon(Icons.arrow_back_ios_new_rounded),
+            icon: Icon(Icons.arrow_back_ios_new_rounded),
+            label: 'Gallery',
           ),
-          const Expanded(child: Center(child: Text('Hello, world!'))),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.favorite),
+            icon: Icon(Icons.favorite_outline_outlined),
+            label: 'Home',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.star),
+            icon: Icon(Icons.star_border_outlined),
+            label: 'Gallery',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.settings_applications),
+            icon: Icon(Icons.settings_applications_outlined),
+            label: 'Settings',
+          ),
         ],
       ),
+      body: <Widget>[
+        /// Home page
+        Card(
+          shadowColor: Colors.transparent,
+          margin: const EdgeInsets.all(8.0),
+          child: SizedBox.expand(
+            child: Center(child: Text('back', style: theme.textTheme.titleLarge)),
+          ),
+        ),
+
+        /// gallery page
+               Card(
+          shadowColor: Colors.transparent,
+          margin: const EdgeInsets.all(8.0),
+          child: SizedBox.expand(
+            child: Center(child: Text('Gallery page', style: theme.textTheme.titleLarge)),
+          ),
+        ),
+
+        /// Messages page
+        Card(
+          shadowColor: Colors.transparent,
+          margin: const EdgeInsets.all(8.0),
+          child: SizedBox.expand(
+            child: Center(child: Text('settings page', style: theme.textTheme.titleLarge)),
+          ),
+        ),
+        Card(
+          shadowColor: Colors.transparent,
+          margin: const EdgeInsets.all(8.0),
+          child: SizedBox.expand(
+            child: Center(child: Text('settings page', style: theme.textTheme.titleLarge)),
+          ),
+        ),
+      ][currentPageIndex],
     );
   }
-}
-
-void main() {
-  runApp(
-    const MaterialApp(
-      title: 'My app', // used by the OS task switcher
-      home: SafeArea(child: MyScaffold()),
-    ),
-  );
 }
