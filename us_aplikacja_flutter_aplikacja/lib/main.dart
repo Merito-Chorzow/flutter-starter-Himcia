@@ -37,7 +37,7 @@ class _NavigationExampleState extends State<NavigationExample> {
           NavigationDestination(
             selectedIcon: Icon(Icons.arrow_back_ios_new_rounded),
             icon: Icon(Icons.arrow_back_ios_new_rounded),
-            label: 'Gallery',
+            label: 'Back',
           ),
           NavigationDestination(
             selectedIcon: Icon(Icons.favorite),
@@ -45,24 +45,24 @@ class _NavigationExampleState extends State<NavigationExample> {
             label: 'Home',
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.star),
-            icon: Icon(Icons.star_border_outlined),
-            label: 'Gallery',
+            selectedIcon: Icon(Icons.person),
+            icon: Icon(Icons.person_outlined),
+            label: 'Profile',
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.settings_applications),
-            icon: Icon(Icons.settings_applications_outlined),
+            selectedIcon: Icon(Icons.settings),
+            icon: Icon(Icons.settings_outlined),
             label: 'Settings',
           ),
         ],
       ),
       body: <Widget>[
-        /// Home page
+        /// Back
         Card(
           shadowColor: Colors.transparent,
           margin: const EdgeInsets.all(8.0),
           child: SizedBox.expand(
-            child: Center(child: Text('back', style: theme.textTheme.titleLarge)),
+            child: Center(child: Text('Back', style: theme.textTheme.titleLarge)),
           ),
         ),
 
@@ -71,7 +71,7 @@ class _NavigationExampleState extends State<NavigationExample> {
           shadowColor: Colors.transparent,
           margin: const EdgeInsets.all(8.0),
           child: SizedBox.expand(
-            child: Center(child: Text('Gallery page', style: theme.textTheme.titleLarge)),
+            child: Center(child: Text('Home page', style: theme.textTheme.titleLarge)),
           ),
         ),
 
@@ -80,14 +80,14 @@ class _NavigationExampleState extends State<NavigationExample> {
           shadowColor: Colors.transparent,
           margin: const EdgeInsets.all(8.0),
           child: SizedBox.expand(
-            child: Center(child: Text('settings page', style: theme.textTheme.titleLarge)),
+            child: Center(child: Text('Profile page', style: theme.textTheme.titleLarge)),
           ),
         ),
         Card(
           shadowColor: Colors.transparent,
           margin: const EdgeInsets.all(8.0),
           child: SizedBox.expand(
-            child: Center(child: Text('settings page', style: theme.textTheme.titleLarge)),
+            child: Center(child: Text('Settings page', style: theme.textTheme.titleLarge)),
           ),
         ),
       ][currentPageIndex],
